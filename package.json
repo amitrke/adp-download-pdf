@@ -5,7 +5,11 @@
   "repository": "https://github.com/amitrke/adp-download-pdf.git",
   "author": "Amit Kumar <amitrke@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
+    "@types/chromedriver": "^81.0.1",
     "@types/selenium-webdriver": "^4.0.18",
     "chromedriver": "^100.0.0",
     "selenium-webdriver": "^4.1.1",
