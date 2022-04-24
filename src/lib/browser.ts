@@ -1,4 +1,3 @@
-import 'chromedriver';
 import { Builder, ThenableWebDriver, WebElement, By, WebElementPromise } from 'selenium-webdriver';
 import { Page, NewablePage, WebComponent, WaitCondition } from './';
 
