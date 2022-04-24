@@ -1,5 +1,4 @@
 import { WebComponent, Browser, Page, findBy, Button, TextInput, elementIsVisible, pageHasLoaded, delay } from '../lib';
-import { ShowIdeaPage, GoogleSignInPage, FacebookSignInPage } from './';
 import config from '../config';
 import { HomePage } from './HomePage';
 
@@ -47,7 +46,6 @@ export class LoginPage1 extends Page {
   public async submitPassword(password: string): Promise<void> {
     await this.Password.type(password);
     await this.SignIn.click();
-    await this.browser.wait(pageHasLoaded(ShowIdeaPage));
   }
 
   public async signOut(): Promise<void> {
@@ -57,28 +55,6 @@ export class LoginPage1 extends Page {
       return;
     }
     await this.browser.wait(pageHasLoaded(HomePage));
-  }
-
-  public async signInWithGoogle(): Promise<void> {
-    await this.browser.clearCookies('https://accounts.google.com');
-    await this.signOut();
-
-    await this.signIn(() => this.GoogleSignIn);
-    await this.browser.waitAny([
-      pageHasLoaded(GoogleSignInPage),
-      pageHasLoaded(HomePage),
-    ]);
-  }
-
-  public async signInWithFacebook(): Promise<void> {
-    await this.browser.clearCookies('https://facebook.com');
-    await this.signOut();
-
-    await this.signIn(() => this.FacebookSignIn);
-    await this.browser.waitAny([
-      pageHasLoaded(FacebookSignInPage),
-      pageHasLoaded(HomePage),
-    ]);
   }
 
   private async signIn(locator: () => WebComponent): Promise<void> {
