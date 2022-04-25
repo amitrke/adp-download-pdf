@@ -1,7 +1,6 @@
 import 'reflect-metadata'
 import { AllPages } from './pages';
-import { Browser, ensure } from './lib';
-import { Builder, ThenableWebDriver, WebElement, By, WebElementPromise, until } from 'selenium-webdriver';
+import { Browser } from './lib';
 import config from './config';
 
 (async() => {
@@ -9,4 +8,8 @@ import config from './config';
     await pages.loginPage1.navigate();
     await pages.loginPage1.submitUserId(config.userId);
     await pages.loginPage1.submitPassword(config.password);
+    const statements = await pages.myAccountPage.loadStatementListJson();
+    for (const statement of statements.payStatements) {
+        await pages.myAccountPage.downloadStatement(statement.statementImageUri.href, statement.payDate)
+    }
 })()

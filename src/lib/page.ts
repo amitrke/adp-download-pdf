@@ -16,6 +16,14 @@ export abstract class Page {
     await this.browser.wait(this.loadCondition());
   }
 
+  public async navigateNoWait(): Promise<void> {
+    await this.browser.navigate(this.url);
+  }
+
+  public async getPageSource(): Promise<string> {
+    return this.browser.getPageSource();
+  }
+
   public abstract loadCondition(): WaitCondition;
 
   public constructor(protected browser: Browser) {

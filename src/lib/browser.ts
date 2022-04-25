@@ -30,6 +30,10 @@ export class Browser {
     await this.waitAny(condition);
   }
 
+  public async getPageSource(): Promise<string> {
+    return this.driver.getPageSource()
+  }
+  
   public async waitAny(conditions: WaitCondition | WaitCondition[]): Promise<void> {
     const all = (!(conditions instanceof Array)) ? [ conditions ] : conditions;
 

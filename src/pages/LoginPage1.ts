@@ -1,6 +1,7 @@
 import { WebComponent, Browser, Page, findBy, Button, TextInput, elementIsVisible, pageHasLoaded, delay } from '../lib';
 import config from '../config';
 import { HomePage } from './HomePage';
+import { MyAccountPage } from './MyAccountPage';
 
 export class LoginPage1 extends Page {
   constructor(browser: Browser) {
@@ -40,26 +41,14 @@ export class LoginPage1 extends Page {
     await this.UserId.type(userId);
     await this.VerifyUserId.click();
     await this.browser.wait(elementIsVisible(() => { return this.Password }));
-    await delay(1400);
   }
 
   public async submitPassword(password: string): Promise<void> {
     await this.Password.type(password);
     await this.SignIn.click();
+    await this.browser.waitAny([
+      pageHasLoaded(MyAccountPage),
+    ]);
   }
 
-  public async signOut(): Promise<void> {
-    try {
-      await this.SignOut.click();
-    } catch (ex) {
-      return;
-    }
-    await this.browser.wait(pageHasLoaded(HomePage));
-  }
-
-  private async signIn(locator: () => WebComponent): Promise<void> {
-    await this.UserMenu.click();
-    await this.browser.wait(elementIsVisible(locator));
-    await locator().click();
-  }
 }
