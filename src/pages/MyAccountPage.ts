@@ -23,13 +23,6 @@ export class MyAccountPage extends Page {
     return elementIsVisible(() => this.StatementListContainer);
   }
 
-  public async loadStatementListJson(): Promise<any> {
-    await this.navigateNoWait();
-    await delay(1000); //TODO: Change this to a better wait logic.
-    const pageSource = await this.getPageSource();
-    return JSON.parse(striptags(pageSource));
-  }
-
   public async getSessionCookie(): Promise<string> {
     return this.getCookieValue('SMSESSION');
   }

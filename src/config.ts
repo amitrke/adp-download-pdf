@@ -19,5 +19,8 @@ if (argv.password) {
 if (argv.folder) {
   config.folder = argv.folder;
 }
+if (argv.browser) {
+  config.browser = argv.browser;
+}
 
 export default config;
