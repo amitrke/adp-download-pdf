@@ -26,6 +26,11 @@ export class Browser {
     }
   }
 
+  public async getCookieValue(name: string): Promise<string> {
+    const cookie = await this.driver.manage().getCookie(name);
+    return cookie.value;
+  }
+
   public async wait(condition: WaitCondition) {
     await this.waitAny(condition);
   }

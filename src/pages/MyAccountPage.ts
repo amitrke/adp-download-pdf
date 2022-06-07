@@ -30,12 +30,8 @@ export class MyAccountPage extends Page {
     return JSON.parse(striptags(pageSource));
   }
 
-  public async downloadStatement(statementUrl: string, payDate: string) {
-    statementUrl = statementUrl.replace('/l2/','/myadp_prefix/');
-    console.log(`About to download ${statementUrl} ${payDate}`);
-    this.setUrl(`${config.baseUrl}${statementUrl}`);
-    await this.navigateNoWait();
-    await delay(1000); //TODO: Change this to a better wait logic.
-    console.log('Done')
+  public async getSessionCookie(): Promise<string> {
+    return this.getCookieValue('SMSESSION');
   }
+
 }

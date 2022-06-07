@@ -24,6 +24,9 @@ export abstract class Page {
     return this.browser.getPageSource();
   }
 
+  public async getCookieValue(name: string): Promise<string> {
+    return this.browser.getCookieValue(name);
+  }
   public abstract loadCondition(): WaitCondition;
 
   public constructor(protected browser: Browser) {
